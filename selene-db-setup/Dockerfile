@@ -2,7 +2,7 @@ FROM selene-backend:db
 
 ADD wait-for-postgres.sh /opt/wait-for-postgres.sh
 
-ENV POSTGRES_PORT=5432
+ENV DB_PORT=5432
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y postgresql wget && \
   wget -O /opt/selene/countryInfo.txt http://download.geonames.org/export/dump/countryInfo.txt && \
@@ -11,4 +11,4 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y postgresql wget && \
   wget -O /opt/selene/cities500.zip http://download.geonames.org/export/dump/cities500.zip && \
   chmod +x /opt/wait-for-postgres.sh
 
-CMD [ "bash", "-c", "/opt/wait-for-postgres.sh $POSTGRES_HOST $POSTGRES_PORT bash -c \"cd /opt/selene/selene-backend/db/scripts && pipenv run python -u bootstrap_mycroft_db.py && touch /shared/db_bootstrap_done && echo 'done'\"" ]
+CMD [ "bash", "-c", "/opt/wait-for-postgres.sh $DB_HOST $DB_PORT bash -c \"cd /opt/selene/selene-backend/db/scripts && pipenv run python -u bootstrap_mycroft_db.py && touch /shared/db_bootstrap_done && echo 'done'\"" ]
