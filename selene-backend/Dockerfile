@@ -20,4 +20,4 @@ RUN mkdir -p /opt/selene/documentation/_pages && \
   printf "%s\n%s\n" '---' '---' > embed-terms-of-use.md
 
 # db sso account market public
-RUN bash -c 'export LANG=en; cd /opt/selene/selene-backend/; if [! "$SELENEAPP" == "db" ]; then cd api/; fi; cd $SELENEAPP; pipenv install;'
+RUN bash -c 'export LANG=en; cd /opt/selene/selene-backend/; if [ ! "$SELENEAPP" == "db" ]; then cd api/; fi; cd $SELENEAPP; pipenv install;'
