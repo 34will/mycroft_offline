@@ -1,5 +1,7 @@
 FROM ubuntu:18.04
 
+ARG SELENEAPP
+
 # https://github.com/MycroftAI/selene-backend
 RUN apt-get update && \
   apt-get install -y python3.7 python python3-pip git python3.7-dev && \
@@ -17,4 +19,5 @@ RUN mkdir -p /opt/selene/documentation/_pages && \
   printf "%s\n%s\n" '---' '---' > embed-privacy-policy.md && \
   printf "%s\n%s\n" '---' '---' > embed-terms-of-use.md
 
-RUN bash -c 'export LANG=en; cd /opt/selene/selene-backend/api; for dir in sso account market public; do pushd $dir; pipenv install; popd; done'
+# db sso account market public
+RUN bash -c 'export LANG=en; cd /opt/selene/selene-backend/; if [! "$SELENEAPP" == "db" ]; then cd api/; fi; cd $SELENEAPP; pipenv install;'
