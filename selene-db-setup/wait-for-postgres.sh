@@ -4,7 +4,7 @@
 set -e
 
 host="$1"
-port="$1"
+port="$2"
 shift
 
 until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -p "$port" -U "postgres" -c '\q'; do
