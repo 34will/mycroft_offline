@@ -4,7 +4,7 @@ ADD wait-for-postgres.sh /opt/wait-for-postgres.sh
 
 # https://github.com/MycroftAI/selene-backend
 RUN apt-get update && \
-  apt-get install -y python3.7 python python3-pip git wget && \
+  apt-get install -y python3.7 python python3-pip git wget python3.7-dev && \
   mkdir -p /opt/selene && \
   mkdir -p /opt/selene/data && \
   mkdir -p /var/log/mycroft && \
