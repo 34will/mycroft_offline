@@ -4,7 +4,7 @@ ADD wait-for-postgres.sh /opt/wait-for-postgres.sh
 
 ENV POSTGRES_PORT=5432
 
-RUN apt-get install postgresql wget && \
+RUN apt-get install -y postgresql wget && \
   wget -O /opt/selene/countryInfo.txt http://download.geonames.org/export/dump/countryInfo.txt && \
   wget -O /opt/selene/timeZones.txt http://download.geonames.org/export/dump/timeZones.txt && \
   wget -O /opt/selene/admin1CodesASCII.txt http://download.geonames.org/export/dump/admin1CodesASCII.txt && \
