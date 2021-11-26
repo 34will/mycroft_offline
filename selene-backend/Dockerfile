@@ -13,11 +13,5 @@ RUN apt-get update && \
 WORKDIR /opt/selene
 RUN git clone https://github.com/MycroftAI/selene-backend.git
 
-  # https://github.com/MycroftAI/selene-backend/issues/201
-RUN mkdir -p /opt/selene/documentation/_pages && \
-  cd /opt/selene/documentation/_pages && \
-  printf "%s\n%s\n" '---' '---' > embed-privacy-policy.md && \
-  printf "%s\n%s\n" '---' '---' > embed-terms-of-use.md
-
 # db sso account market public
 RUN bash -c 'export LANG=en; cd /opt/selene/selene-backend/; if [ ! "$SELENEAPP" == "db" ]; then cd api/; fi; cd $SELENEAPP; pipenv install;'
