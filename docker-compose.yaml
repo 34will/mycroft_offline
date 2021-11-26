@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     volumes:
       - selene-db:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
     command:
       - -c
       - "listen_addresses=*"
