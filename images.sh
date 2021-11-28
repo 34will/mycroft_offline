@@ -9,3 +9,4 @@ docker build -t selene-db-setup ./selene-db-setup ;
 docker build --build-arg SELENEAPPDIR=/opt/selene/selene-backend/api/sso --build-arg FILECHECK="$db_bootstrap_done" -t selene-sso ./selene-app ;
 docker build --build-arg SELENEAPPDIR=/opt/selene/selene-backend/api/account --build-arg FILECHECK="$db_bootstrap_done" -t selene-account ./selene-app ;
 docker build -t selene-skills-setup ./selene-skills-setup ;
+docker build --build-arg SELENEAPPDIR=/opt/selene/selene-backend/api/market --build-arg FILECHECK="$skills_setup_done" -t selene-market ./selene-app ;
