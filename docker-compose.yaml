@@ -125,42 +125,38 @@ services:
       SALT: "${ENCRYPTION_SALT}"
       OAUTH_BASE_URL: "${OAUTH_BASE_URL}"
   devices:
-    image: selene-backend
+    image: selene-devices
     restart: "on-failure"
     volumes:
       - shared:/shared
     links:
       - db
       - redis
+    ports:
+      - "${DEVICES_APP_PORT}:${DEVICES_APP_PORT}"
+      - "5000:${DEVICES_APP_PORT_SOCKET}"
     expose:
-      - "4000"
-    command:
-      - bash
-      - -c
-      - "if [ ! -f /shared/skills_setup_done ]; then echo 'Skills downloading and setup not done. Exiting.'; exit 1; fi;
-         cd /opt/selene/selene-backend/api/public && /usr/local/bin/pipenv run uwsgi -b 32768 --http 0.0.0.0:4000 --ini uwsgi.ini"
+      - "${DEVICES_APP_PORT}/tcp"
+      - "${DEVICES_APP_PORT_SOCKET}/tcp"
     environment:
+      REDIS_HOST: redis
       DB_HOST: db
-      DB_NAME: mycroft
       DB_PASSWORD: "${DB_PASSWORD}"
-      DB_PORT: 5432
-      DB_USER: selene
+      DB_PORT: "${DB_PORT}"
+      APP_PORT: "${DEVICES_APP_PORT}"
       JWT_ACCESS_SECRET: "${JWT_ACCESS_SECRET}"
       JWT_REFRESH_SECRET: "${JWT_REFRESH_SECRET}"
       SALT: "${ENCRYPTION_SALT}"
-      SELENE_ENVIRONMENT: prod
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
       OAUTH_BASE_URL: "${OAUTH_BASE_URL}"
       EMAIL_SERVICE_HOST: "${EMAIL_SERVICE_HOST}"
       EMAIL_SERVICE_PORT: "${EMAIL_SERVICE_PORT}"
       EMAIL_SERVICE_USER: "${EMAIL_SERVICE_USER}"
       EMAIL_SERVICE_PASSWORD: "${EMAIL_SERVICE_PASSWORD}"
-      GOOGLE_STT_KEY: "${GOOGLE_STT_KEY}" # NOTE: Optional if you plan to use Google for STT
       OWM_KEY: "${OWM_KEY}"
       OWM_URL: "https://api.openweathermap.org/data/2.5"
       WOLFRAM_ALPHA_KEY: "${WOLFRAM_ALPHA_KEY}"
       WOLFRAM_ALPHA_URL: "https://api.wolframalpha.com"
+      GOOGLE_STT_KEY: ""
 
   # UI
   selene-ui-market:
