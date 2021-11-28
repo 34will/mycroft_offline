@@ -2,6 +2,6 @@
 # wait-for-bootstrap.sh
 
 while [ ! -f $1 ]; do
-    echo 'Bootstraping not done. Exiting.';
+    echo "$1 not found. Bootstrapping not done. Retrying.";
     sleep 5;
 done;
