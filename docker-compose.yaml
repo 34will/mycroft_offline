@@ -118,6 +118,7 @@ services:
       REDIS_HOST: redis
       DB_HOST: db
       DB_PASSWORD: "${DB_PASSWORD}"
+      DB_PORT: "${DB_PORT}"
       APP_PORT: "${MARKET_APP_PORT}"
       JWT_ACCESS_SECRET: "${JWT_ACCESS_SECRET}"
       JWT_REFRESH_SECRET: "${JWT_REFRESH_SECRET}"
