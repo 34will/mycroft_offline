@@ -8,6 +8,7 @@ ENV REDIS_PORT=6379
 
 ADD pipenv-install.sh /opt/pipenv-install.sh
 ADD wait-for-bootstrap.sh /opt/wait-for-bootstrap.sh
+ADD common.sh /opt/common.sh
 
 # https://github.com/MycroftAI/selene-backend
 RUN apt-get update && \
@@ -17,7 +18,8 @@ RUN apt-get update && \
   mkdir -p /var/log/mycroft && \
   python3.7 -m pip install pipenv && \
   chmod +x /opt/pipenv-install.sh && \
-  chmod +x /opt/wait-for-bootstrap.sh
+  chmod +x /opt/wait-for-bootstrap.sh && \
+  chmod +x /opt/common.sh
 
 WORKDIR /opt/selene
 RUN git clone https://github.com/MycroftAI/selene-backend.git

@@ -1,7 +1,7 @@
 #!/bin/bash
 # bootstrap-db.sh
 
-source common.sh
+source /opt/common.sh
 
 set -e
 
