@@ -20,6 +20,11 @@ RUN chmod +x /opt/wait-for-postgres.sh && \
   rm /opt/selene/selene-backend/db/mycroft/drop_roles.sql && \
   echo "SELECT * FROM pg_user" >> /opt/selene/selene-backend/db/mycroft/drop_roles.sql && \
   rm /opt/selene/selene-backend/db/mycroft/create_roles.sql && \
-  echo "SELECT * FROM pg_user" >> /opt/selene/selene-backend/db/mycroft/create_roles.sql
+  echo "SELECT * FROM pg_user" >> /opt/selene/selene-backend/db/mycroft/create_roles.sql && \
+  # https://github.com/MycroftAI/selene-backend/issues/201
+  mkdir -p /opt/mycroft/devops/agreements && \
+  cd /opt/mycroft/devops/agreements && \
+  printf "%s\n%s\n" '---' '---' > privacy_policy.md && \
+  printf "%s\n%s\n" '---' '---' > terms_of_use.md
 
 CMD [ "bash", "-c", "/opt/wait-for-postgres.sh $DB_HOST $DB_PORT bash -c \"DB_PASSWORD=$DB_PASSWORD /opt/postgres-user.sh $DB_HOST $DB_PORT $DB_PASSWORD && /opt/bootstrap-db.sh && echo 'done'\"" ]
