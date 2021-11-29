@@ -5,10 +5,12 @@ ENV DB_NAME=mycroft
 ENV DB_PORT=5432
 ENV SELENE_ENVIRONMENT=prod
 ENV REDIS_PORT=6379
+ENV DOMAIN=".mycroft.ai"
 
 ADD pipenv-install.sh /opt/pipenv-install.sh
 ADD wait-for-bootstrap.sh /opt/wait-for-bootstrap.sh
 ADD common.sh /opt/common.sh
+ADD update-domain.sh /opt/update-domain.sh
 
 # https://github.com/MycroftAI/selene-backend
 RUN apt-get update && \
@@ -19,7 +21,8 @@ RUN apt-get update && \
   python3.7 -m pip install pipenv && \
   chmod +x /opt/pipenv-install.sh && \
   chmod +x /opt/wait-for-bootstrap.sh && \
-  chmod +x /opt/common.sh
+  chmod +x /opt/common.sh && \
+  chmod +x /opt/update-domain.sh
 
 WORKDIR /opt/selene
 RUN git clone https://github.com/MycroftAI/selene-backend.git
