@@ -163,15 +163,40 @@ services:
       GOOGLE_STT_KEY: ""
 
   # UI
-  selene-ui-market:
-    image: selene-ui-market
-    restart: "on-failure"
   selene-ui-account:
     image: selene-ui-account
     restart: "on-failure"
+    ports:
+      - 80:34020
+    expose:
+      - 34020
+    environment:
+      ACCOUNT_URL: "${ACCOUNT_URL}"
+      MARKET_URL: "${MARKET_URL}"
+      SSO_URL: "${SSO_URL}"
+  selene-ui-market:
+    image: selene-ui-market
+    restart: "on-failure"
+    ports:
+      - 80:34021
+    expose:
+      - 34021
+    environment:
+      ACCOUNT_URL: "${ACCOUNT_URL}"
+      MARKET_URL: "${MARKET_URL}"
+      SSO_URL: "${SSO_URL}"
   selene-ui-sso:
     image: selene-ui-sso
     restart: "on-failure"
+    ports:
+      - 80:34022
+    expose:
+      - 34022
+    environment:
+      ACCOUNT_URL: "${ACCOUNT_URL}"
+      MARKET_URL: "${MARKET_URL}"
+      SSO_URL: "${SSO_URL}"
+
   # This is and nginx reverse proxy that redirects all subdomains and api
   # endpoints to the correct container.
   selene-ui-proxy:
