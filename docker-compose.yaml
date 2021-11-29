@@ -59,6 +59,7 @@ services:
       JWT_REFRESH_SECRET: "${JWT_REFRESH_SECRET}"
       JWT_RESET_SECRET: "${JWT_RESET_SECRET}"
       SALT: "${ENCRYPTION_SALT}"
+      DOMAIN: "${DOMAIN}"
       SENDGRID_API_KEY: "${SENDGRID_API_KEY}"
       SSO_BASE_URL: "${SSO_BASE_URL}"
       GITHUB_CLIENT_ID: ""
@@ -86,6 +87,7 @@ services:
       JWT_ACCESS_SECRET: "${JWT_ACCESS_SECRET}"
       JWT_REFRESH_SECRET: "${JWT_REFRESH_SECRET}"
       SALT: "${ENCRYPTION_SALT}"
+      DOMAIN: "${DOMAIN}"
       OAUTH_BASE_URL: "${OAUTH_BASE_URL}"
   skills_setup:
     image: selene-skills-setup
@@ -123,6 +125,7 @@ services:
       JWT_ACCESS_SECRET: "${JWT_ACCESS_SECRET}"
       JWT_REFRESH_SECRET: "${JWT_REFRESH_SECRET}"
       SALT: "${ENCRYPTION_SALT}"
+      DOMAIN: "${DOMAIN}"
       OAUTH_BASE_URL: "${OAUTH_BASE_URL}"
   devices:
     image: selene-devices
@@ -147,6 +150,7 @@ services:
       JWT_ACCESS_SECRET: "${JWT_ACCESS_SECRET}"
       JWT_REFRESH_SECRET: "${JWT_REFRESH_SECRET}"
       SALT: "${ENCRYPTION_SALT}"
+      DOMAIN: "${DOMAIN}"
       OAUTH_BASE_URL: "${OAUTH_BASE_URL}"
       EMAIL_SERVICE_HOST: "${EMAIL_SERVICE_HOST}"
       EMAIL_SERVICE_PORT: "${EMAIL_SERVICE_PORT}"
