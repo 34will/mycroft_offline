@@ -14,3 +14,4 @@ docker build --build-arg SELENEAPPDIR=/opt/selene/selene-backend/api/public --bu
 docker build --build-arg APPNAME=market -t selene-ui-market ./selene-ui
 docker build --build-arg APPNAME=account -t selene-ui-account ./selene-ui
 docker build --build-arg APPNAME=sso -t selene-ui-sso ./selene-ui
+docker build -t deepspeech ./deepspeech

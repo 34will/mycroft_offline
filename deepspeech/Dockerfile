@@ -1,16 +1,16 @@
-FROM ubuntu:18.04
+FROM nvidia/cuda:10.1-base
 
-# https://pypi.org/project/deepspeech-server/
+CMD nvidia-smi
 
-RUN apt-get update
-RUN apt-get install -y python3.7 python python3-pip git wget python3.7-dev
+RUN apt-get update && \
+    apt-get install -y python3.7 python python3-pip git wget python3.7-dev && \
+    pip3 install deepspeech-gpu && \
+    pip3 install deepspeech-server && \
+    wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/models_0.9.tar.gz && \
+    tar xvfz models_0.9.tar.gz
 
-RUN pip3 install deepspeech
-RUN pip3 install deepspeech-server
-RUN wget https://github.com/mozilla/DeepSpeech/releases/download/v0.6.1/deepspeech-0.6.1-models.tar.gz
-RUN tar xvfz deepspeech-0.6.1-models.tar.gz
-WORKDIR deepspeech-0.6.1-models
+WORKDIR models
 
-RUN wget -O config.json https://raw.githubusercontent.com/MainRo/deepspeech-server/master/config.sample.json
+ADD config.json config.json
 
-CMD ["deepspeech-server", "--config", "config.json"]
+CMD [ "deepspeech-server", "--config", "config.json" ]
